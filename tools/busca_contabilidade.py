@@ -26,13 +26,25 @@ class ContabilidadeKnowledgeBase:
         
     def load_or_create_knowledge_base(self):
         """Carrega ou cria a base de conhecimento."""
+        faiss_path = self.cache_file.replace('.pkl', '_faiss')
+        
+        # Tentar carregar usando FAISS save_local primeiro
+        if os.path.exists(faiss_path):
+            try:
+                embeddings = OpenAIEmbeddings(api_key=os.getenv("OPENAI_API_KEY"))
+                self.vectorstore = FAISS.load_local(faiss_path, embeddings, allow_dangerous_deserialization=True)
+                return
+            except Exception as e:
+                print(f"Erro ao carregar FAISS: {e}")
+        
+        # Fallback para pickle (compatibilidade)
         if os.path.exists(self.cache_file):
             try:
                 with open(self.cache_file, 'rb') as f:
                     self.vectorstore = pickle.load(f)
                 return
-            except:
-                pass
+            except Exception as e:
+                print(f"Erro ao carregar pickle: {e}")
         
         # Criar nova base de conhecimento
         self._create_knowledge_base()
@@ -57,9 +69,11 @@ class ContabilidadeKnowledgeBase:
             # Criar vectorstore
             self.vectorstore = FAISS.from_documents(texts, embeddings)
             
-            # Salvar cache
-            with open(self.cache_file, 'wb') as f:
-                pickle.dump(self.vectorstore, f)
+            # Salvar cache usando FAISS save_local
+            try:
+                self.vectorstore.save_local(self.cache_file.replace('.pkl', '_faiss'))
+            except Exception as save_error:
+                print(f"Aviso: Não foi possível salvar cache: {save_error}")
                 
         except Exception as e:
             print(f"Erro ao criar base de conhecimento: {e}")

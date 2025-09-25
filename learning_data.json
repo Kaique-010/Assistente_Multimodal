@@ -1,0 +1,116 @@
+{
+  "interactions": [
+    {
+      "timestamp": "2025-09-25T11:13:59.802509",
+      "user_input": "crie uma imagem de um gato em cima de uma moto \n",
+      "intent": "gerar_imagem",
+      "model_used": "OpenAI GPT-4"
+    },
+    {
+      "timestamp": "2025-09-25T11:17:48.256096",
+      "user_input": "fale sobre a nova tributação do brasil para 2026\n",
+      "intent": "contabilidade",
+      "model_used": "OpenAI GPT-4"
+    },
+    {
+      "timestamp": "2025-09-25T11:19:39.974572",
+      "user_input": "fale sobre essa sql \n",
+      "intent": "banco_de_dados",
+      "model_used": "OpenAI GPT-4"
+    },
+    {
+      "timestamp": "2025-09-25T11:20:06.793887",
+      "user_input": "fale sobre essa sql \n",
+      "intent": "banco_de_dados",
+      "model_used": "OpenAI GPT-4"
+    },
+    {
+      "timestamp": "2025-09-25T11:21:23.207916",
+      "user_input": "fale sobre essa sql  \n\nselect\n      empresa AS \"Empresa\",           \n      em.empr_nome \"Nome da Emprea\",\n      cliente AS \"Cliente\",  \n      en.enti_nome \"Nome do Cliente\",\n      filial AS \"Filial\",                                                          \n      status_nfe,                                      \n      b09_demi AS \"Data de Emissão\",     \n      b08_nnf AS \"Nº da nota\",                   \n      w16_vnf_tota AS\"Valor Total NF\",                                    \n      w18_vserv_tota AS\"Valor Total Serviço\",            \n      vpertrib AS \"% de Trib.\",                          \n      vtottrib AS \"Total Tributado\",             \n      e11_xmun AS \"Municpio\",                     \n      e12_uf AS \"Estado\",             \n      e02_cnpj AS \"Pessoa Juridica\",                                                 \n      e03_cpf AS \"Pessoa Física\"                       \nfrom nfevv                                                   \nJOIN empresas em ON empresa = em.empr_codi\nLEFT JOIN entidades en on en.enti_clie = cliente and en.enti_empr = empresa\nwhere status_nfe = 100  \nORDER BY b08_nnf           \n\n",
+      "intent": "banco_de_dados",
+      "model_used": "OpenAI GPT-4"
+    },
+    {
+      "timestamp": "2025-09-25T11:22:23.885374",
+      "user_input": "e essa busca esta sendo feita aparentemewnte pra quew ?",
+      "intent": "busca_geral",
+      "model_used": "OpenAI GPT-4"
+    },
+    {
+      "timestamp": "2025-09-25T11:30:52.357641",
+      "user_input": "Olá tudo bem?",
+      "intent": "erro",
+      "model_used": "gpt-4o"
+    },
+    {
+      "timestamp": "2025-09-25T11:33:52.748265",
+      "user_input": "fale sobre as mudanças no regime tributario do brasil",
+      "intent": "contabilidade",
+      "model_used": "gpt-4o"
+    },
+    {
+      "timestamp": "2025-09-25T11:37:34.726455",
+      "user_input": "vamos falar sobre simples nacional",
+      "intent": "contabilidade",
+      "model_used": "gpt-4o"
+    },
+    {
+      "timestamp": "2025-09-25T11:41:43.208635",
+      "user_input": "vamos falar sobre a nova regra de tributação paa o brasil ",
+      "intent": "contabilidade",
+      "model_used": "gpt-4o"
+    },
+    {
+      "timestamp": "2025-09-25T11:42:24.364493",
+      "user_input": "E quando entra em vigor?",
+      "intent": "busca_geral",
+      "model_used": "gpt-4o"
+    }
+  ],
+  "feedback": [
+    {
+      "timestamp": "2025-09-25T11:14:16.476585",
+      "user_input": "crie uma imagem de um gato em cima de uma moto \n",
+      "response": "✅ Imagem gerada com sucesso!\n\n🖼️ **Descrição:** crie uma imagem de um gato em cima de uma moto \n\n\n🔗 **Link da imagem:** https://oaidalleapiprodscus.blob.core.windows.net/private/org-xstUAHQgo2nyMGFTd01NQ4IR/user-PWaHEjOihhprsBTl72uHXjQ1/img-v6vw5oy2t8Iz6Q7Mqqo2Si0T.png?st=2025-09-25T13%3A14%3A16Z&se=2025-09-25T15%3A14%3A16Z&sp=r&sv=2024-08-04&sr=b&rscd=inline&rsct=image/png&skoid=475fd488-6c59-44a5-9aa9-31c4db451bea&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2025-09-25T13%3A36%3A47Z&ske=2025-09-26T13%3A36%3A47Z&sks=b&skv=2024-08-04&sig=4AYeNcDXoSUQsqN%2B1i8yUshZ3bYdAyJFwCb8skYA8cg%3D",
+      "feedback_type": "positive"
+    },
+    {
+      "timestamp": "2025-09-25T11:18:08.239859",
+      "user_input": "fale sobre a nova tributação do brasil para 2026\n",
+      "response": "Desculpe, mas como uma inteligência artificial, eu não tenho a capacidade de prever ou fornecer informações sobre eventos futuros, como a nova tributação do Brasil para 2026. Até a data atual (2021), não tenho informações atualizadas sobre esse tópico específico. Recomendo que você consulte um especialista em tributação ou um profissional de contabilidade para obter as informações mais recentes e precisas.",
+      "feedback_type": "positive"
+    },
+    {
+      "timestamp": "2025-09-25T11:19:41.728761",
+      "user_input": "fale sobre essa sql \n",
+      "response": "A consulta SQL não foi fornecida na pergunta. Por favor, forneça a consulta SQL para que eu possa analisá-la e fornecer uma resposta especializada.",
+      "feedback_type": "positive"
+    },
+    {
+      "timestamp": "2025-09-25T11:20:28.382142",
+      "user_input": "fale sobre essa sql \n",
+      "response": "A pergunta não forneceu uma consulta SQL específica para ser analisada. No entanto, posso fornecer uma análise geral de como as consultas SQL podem ser formadas com base na estrutura do banco de dados fornecida.\n\n1. Para obter todos os usuários e suas respectivas vendas, podemos usar a seguinte consulta:\n\n```sql\nSELECT usuarios.nome, vendas.valor_total, vendas.data_venda\nFROM usuarios\nJOIN vendas ON usuarios.id = vendas.usuario_id;\n```\nEsta consulta retorna o nome do usuário, o valor total da venda e a data da venda. O JOIN é usado para combinar linhas de duas ou mais tabelas com base em uma coluna relacionada entre elas, que neste caso é o 'id' do usuário.\n\n2. Para obter todos os produtos e suas respectivas categorias, podemos usar a seguinte consulta:\n\n```sql\nSELECT produtos.nome, categorias.nome\nFROM produtos\nJOIN categorias ON produtos.categoria_id = categorias.id;\n```\nEsta consulta retorna o nome do produto e o nome da categoria a que pertence. O JOIN é usado para combinar linhas de duas ou mais tabelas com base em uma coluna relacionada entre elas, que neste caso é o 'id' da categoria.\n\n3. Para obter todas as vendas e os respectivos produtos e usuários, podemos usar a seguinte consulta:\n\n```sql\nSELECT vendas.valor_total, produtos.nome, usuarios.nome\nFROM vendas\nJOIN produtos ON vendas.produto_id = produtos.id\nJOIN usuarios ON vendas.usuario_id = usuarios.id;\n```\nEsta consulta retorna o valor total da venda, o nome do produto vendido e o nome do usuário que fez a compra. São usados dois JOINs para combinar linhas de três tabelas com base em colunas relacionadas entre elas.\n\nEm termos de índices, seria apropriado ter índices nas colunas 'usuario_id' e 'produto_id' na tabela 'vendas', e na coluna 'categoria_id' na tabela 'produtos'. Isso aceleraria as consultas que envolvem essas colunas.",
+      "feedback_type": "positive"
+    },
+    {
+      "timestamp": "2025-09-25T11:21:43.990868",
+      "user_input": "fale sobre essa sql  \n\nselect\n      empresa AS \"Empresa\",           \n      em.empr_nome \"Nome da Emprea\",\n      cliente AS \"Cliente\",  \n      en.enti_nome \"Nome do Cliente\",\n      filial AS \"Filial\",                                                          \n      status_nfe,                                      \n      b09_demi AS \"Data de Emissão\",     \n      b08_nnf AS \"Nº da nota\",                   \n      w16_vnf_tota AS\"Valor Total NF\",                                    \n      w18_vserv_tota AS\"Valor Total Serviço\",            \n      vpertrib AS \"% de Trib.\",                          \n      vtottrib AS \"Total Tributado\",             \n      e11_xmun AS \"Municpio\",                     \n      e12_uf AS \"Estado\",             \n      e02_cnpj AS \"Pessoa Juridica\",                                                 \n      e03_cpf AS \"Pessoa Física\"                       \nfrom nfevv                                                   \nJOIN empresas em ON empresa = em.empr_codi\nLEFT JOIN entidades en on en.enti_clie = cliente and en.enti_empr = empresa\nwhere status_nfe = 100  \nORDER BY b08_nnf           \n\n",
+      "response": "Esta consulta SQL está selecionando várias colunas de uma tabela chamada \"nfevv\" e realizando JOINs com as tabelas \"empresas\" e \"entidades\". \n\nAqui está o que cada parte da consulta está fazendo:\n\n- `select ... from nfevv`: Esta é a tabela principal da qual os dados estão sendo selecionados.\n\n- `JOIN empresas em ON empresa = em.empr_codi`: Esta linha está juntando a tabela \"empresas\" com a tabela \"nfevv\" com base na coluna \"empresa\" na tabela \"nfevv\" e a coluna \"empr_codi\" na tabela \"empresas\". O resultado é um conjunto de dados que combina linhas de ambas as tabelas onde o valor na coluna \"empresa\" é igual ao valor na coluna \"empr_codi\".\n\n- `LEFT JOIN entidades en on en.enti_clie = cliente and en.enti_empr = empresa`: Esta linha está realizando um LEFT JOIN com a tabela \"entidades\". Um LEFT JOIN retorna todas as linhas da tabela à esquerda (neste caso, \"nfevv\"), e as linhas correspondentes da tabela à direita (neste caso, \"entidades\"). Se não houver correspondência, o resultado é NULL no lado direito.\n\n- `where status_nfe = 100`: Esta linha está filtrando os resultados para incluir apenas as linhas onde o valor na coluna \"status_nfe\" é igual a 100.\n\n- `ORDER BY b08_nnf`: Esta linha está ordenando os resultados pela coluna \"b08_nnf\".\n\nOs índices podem ser úteis nas colunas usadas para JOINs e na cláusula WHERE para acelerar a consulta. Portanto, os índices podem ser considerados nas colunas \"empresa\", \"empr_codi\", \"enti_clie\", \"enti_empr\" e \"status_nfe\".\n\nPor fim, as colunas selecionadas estão sendo renomeadas para nomes mais legíveis usando o alias (por exemplo, \"empresa\" está sendo renomeado para \"Empresa\", \"em.empr_nome\" está sendo renomeado para \"Nome da Empresa\", etc.).",
+      "feedback_type": "positive"
+    },
+    {
+      "timestamp": "2025-09-25T11:22:26.805782",
+      "user_input": "e essa busca esta sendo feita aparentemewnte pra quew ?",
+      "response": "Desculpe, mas sua pergunta não está clara. Poderia fornecer mais detalhes sobre a busca a que você está se referindo? Isso me ajudará a fornecer a melhor informação possível.",
+      "feedback_type": "positive"
+    }
+  ],
+  "usage_patterns": {
+    "gerar_imagem": 1,
+    "contabilidade": 4,
+    "banco_de_dados": 3,
+    "busca_geral": 2,
+    "erro": 1
+  },
+  "last_updated": "2025-09-25T11:42:24.364493"
+}

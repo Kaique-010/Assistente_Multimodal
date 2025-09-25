@@ -1,183 +1,241 @@
 import streamlit as st
 import os
 from dotenv import load_dotenv
-from tools.classificar_intencao import classificar_intencao
-from tools.busca_contabilidade import busca_contabilidade
-from tools.busca_assistencia_de_banco_de_dados import busca_assistencia_de_banco_de_dados
-from tools.busca_assistencia_gestao import busca_assistencia_gestao
-from tools.busca_geral import busca_geral
-from tools.gerar_imagem import gerar_imagem
-from tools.analisar_imagem import analisar_imagem
-from tools.gerar_audio import gerar_audio
-from tools.analisar_audio import analisar_audio
-from tools.gerar_video import gerar_video
-from tools.analisar_video import analisar_video
+from agent_graph import AssistenteMultimodalGraph
 from learning_system import LearningSystem
 
 # Carregar variáveis de ambiente
 load_dotenv()
 
-# Configuração da página
-st.set_page_config(
-    page_title="Assistente Multimodal",
-    page_icon="🤖",
-    layout="wide",
-    initial_sidebar_state="expanded"
-)
-
-# Inicializar sistema de aprendizado
-learning_system = LearningSystem()
-
-# Título principal
-st.title("🤖 Assistente Multimodal Inteligente")
-st.markdown("---")
-
-# Sidebar para configurações
-with st.sidebar:
-    st.header("⚙️ Configurações")
-    
-    # Seleção de modelo
-    modelo_selecionado = st.selectbox(
-        "Modelo de IA:",
-        ["OpenAI GPT-4", "Google Gemini", "Anthropic Claude"],
-        index=0
+def main():
+    # Configuração da página
+    st.set_page_config(
+        page_title="Assistente Multimodal Spartacus Sistemas",
+        page_icon="🤖",
+        layout="wide",
+        initial_sidebar_state="expanded"
     )
     
-    # Configurações de temperatura
-    temperatura = st.slider(
-        "Criatividade (Temperatura):",
-        min_value=0.0,
-        max_value=1.0,
-        value=0.7,
-        step=0.1
+    # CSS personalizado para estilo moderno
+    st.markdown("""
+    <style>
+    /* Background gradient */
+    .stApp {
+        background: linear-gradient(135deg, #2C6582 0%, #557D87 100%);
+    }
+    
+    /* Container principal */
+    .main .block-container {
+        background: rgba(255, 255, 255, 0.95);
+        border-radius: 15px;
+        padding: 2rem;
+        margin-top: 1rem;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        backdrop-filter: blur(10px);
+    }
+    
+    /* Sidebar styling */
+    .css-1d391kg {
+        background: linear-gradient(180deg, #4facfe 0%, #00f2fe 100%);
+    }
+    
+    .sidebar .sidebar-content {
+        background: linear-gradient(180deg, #4facfe 0%, #00f2fe 100%);
+        border-radius: 15px;
+    }
+    
+    /* Chat messages */
+    .stChatMessage {
+        background: rgba(255, 255, 255, 0.9);
+        border-radius: 10px;
+        margin: 0.5rem 0;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+    
+    /* Input area */
+    .stChatInput {
+        border-radius: 25px;
+        border: 2px solid #4facfe;
+    }
+    
+    /* Buttons */
+    .stButton > button {
+        background: linear-gradient(45deg, #667eea, #764ba2);
+        color: white;
+        border: none;
+        border-radius: 25px;
+        padding: 0.5rem 1rem;
+        font-weight: 600;
+        transition: all 0.3s ease;
+    }
+    
+    .stButton > button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+    
+    /* File uploader */
+    .stFileUploader {
+        background: rgba(255, 255, 255, 0.8);
+        border-radius: 10px;
+        padding: 1rem;
+        border: 2px dashed #4facfe;
+    }
+    
+    /* Metrics */
+    .metric-container {
+        background: rgba(255, 255, 255, 0.9);
+        border-radius: 10px;
+        padding: 1rem;
+        margin: 0.5rem 0;
+    }
+    
+    /* Title styling */
+    h1 {
+        color: #2c3e50;
+        text-align: center;
+        font-weight: 700;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    st.markdown{
+        text-align:center
+    }
+    /* Sidebar title */
+    .sidebar h2 {
+        color: #2c3e50;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+    }
+    </style>
+    """, unsafe_allow_html=True)
+    
+    st.title("Assistente Multimodal Spartacus Sistemas")
+    st.markdown("Sistema inteligente baseado em grafos para assistência especializada")
+    
+    # Inicializar o sistema de grafos
+    if 'agent_graph' not in st.session_state:
+        st.session_state.agent_graph = AssistenteMultimodalGraph()
+    
+    # Inicializar sistema de aprendizado
+    if 'learning_system' not in st.session_state:
+        st.session_state.learning_system = LearningSystem()
+    
+    # Inicializar histórico de chat
+    if 'messages' not in st.session_state:
+        st.session_state.messages = []
+    
+    # Sidebar com informações
+    with st.sidebar:
+        st.markdown("""
+        <div style="text-align: center; padding: 1rem;">
+            <h2 style="color: white; margin-bottom: 0;">📊 Sistema</h2>
+            <p style="color: rgba(255,255,255,0.8); font-size: 0.9rem;">LangGraph + Memória Conversacional</p>
+        </div>
+        """, unsafe_allow_html=True)
+        
+        # Container para métricas
+        st.markdown('<div class="metric-container">', unsafe_allow_html=True)
+        
+        # Estatísticas do sistema de aprendizado
+        stats = st.session_state.learning_system.get_learning_insights()
+        if stats.get('total_interactions', 0) > 0:
+            col1, col2 = st.columns(2)
+            with col1:
+                st.metric("🔄 Interações", stats['total_interactions'])
+            with col2:
+                if 'success_rate' in stats:
+                    st.metric("✅ Sucesso", f"{stats['success_rate']:.1%}")
+        
+        st.markdown('</div>', unsafe_allow_html=True)
+        
+        # Espaçamento
+        st.markdown("<br>", unsafe_allow_html=True)
+        
+        # Botão para limpar histórico com estilo
+        st.markdown("""
+        <div style="text-align: center;">
+        """, unsafe_allow_html=True)
+        
+        if st.button("🗑️ Limpar Histórico", use_container_width=True):
+            st.session_state.messages = []
+            st.session_state.agent_graph.limpar_historico()  # Usar método do grafo
+            st.rerun()
+            
+        st.markdown("</div>", unsafe_allow_html=True)
+        
+        # Informações adicionais
+        st.markdown("""
+        <div style="margin-top: 2rem; padding: 1rem; background: rgba(255,255,255,0.1); border-radius: 10px;">
+            <h4 style="color: white; margin-bottom: 0.5rem;">🚀 Recursos</h4>
+            <ul style="color: rgba(255,255,255,0.9); font-size: 0.85rem; margin: 0;">
+                <li>Análise de imagens, áudio e vídeo</li>
+                <li>Busca especializada em contabilidade</li>
+                <li>Assistência em gestão empresarial</li>
+                <li>Geração de conteúdo multimodal</li>
+            </ul>
+        </div>
+        """, unsafe_allow_html=True)
+    
+    # Área de upload de arquivos
+    st.markdown("""
+    <div style="margin: 2rem 0;">
+        <h3 style="color: #2c3e50; margin-bottom: 1rem;">📎 Upload de Arquivos</h3>
+    </div>
+    """, unsafe_allow_html=True)
+    
+    uploaded_files = st.file_uploader(
+        "Arraste e solte seus arquivos aqui ou clique para selecionar",
+        accept_multiple_files=True,
+        type=['png', 'jpg', 'jpeg', 'gif', 'mp3', 'wav', 'mp4', 'avi', 'mov', 'txt'],
+        help="Suporte para imagens, áudio, vídeo e texto"
     )
     
-    st.markdown("---")
-    st.markdown("### 📊 Estatísticas")
+    # Exibir histórico de mensagens
+    for message in st.session_state.messages:
+        with st.chat_message(message["role"]):
+            st.markdown(message["content"])
     
-    # Mostrar estatísticas do sistema de aprendizado
-    stats = learning_system.get_learning_insights()
-    st.metric("Total de Interações", stats.get('total_interactions', 0))
-    st.metric("Consultas Frequentes", len(stats.get('frequent_queries', [])))
-
-# Interface principal
-col1, col2 = st.columns([2, 1])
-
-with col1:
-    st.header("💬 Conversa")
-    
-    # Área de entrada do usuário
-    user_input = st.text_area(
-        "Digite sua pergunta ou solicitação:",
-        height=100,
-        placeholder="Ex: Como fazer uma nota fiscal? Crie uma imagem de um gato..."
-    )
-    
-    # Upload de arquivos
-    uploaded_file = st.file_uploader(
-        "Ou faça upload de um arquivo:",
-        type=['png', 'jpg', 'jpeg', 'mp3', 'wav', 'mp4', 'avi', 'mov']
-    )
-    
-    # Botão de envio
-    if st.button("🚀 Enviar", type="primary"):
-        if user_input or uploaded_file:
+    # Input do usuário
+    if prompt := st.chat_input("Digite sua mensagem..."):
+        # Adicionar mensagem do usuário ao histórico
+        st.session_state.messages.append({"role": "user", "content": prompt})
+        
+        with st.chat_message("user"):
+            st.markdown(prompt)
+        
+        # Processar com o sistema de grafos
+        with st.chat_message("assistant"):
             with st.spinner("Processando..."):
                 try:
-                    # Classificar intenção
-                    intencao = classificar_intencao(user_input if user_input else "Analisar arquivo")
-                    
-                    # Registrar interação
-                    learning_system.record_interaction(
-                        user_input if user_input else "Upload de arquivo",
-                        intencao,
-                        modelo_selecionado
+                    # Executar o grafo
+                    resultado = st.session_state.agent_graph.processar_mensagem(
+                        prompt, 
+                        uploaded_files
                     )
                     
-                    # Processar baseado na intenção
-                    if intencao == "contabilidade":
-                        resposta = busca_contabilidade(user_input)
-                    elif intencao == "banco_de_dados":
-                        resposta = busca_assistencia_de_banco_de_dados(user_input)
-                    elif intencao == "gestao":
-                        resposta = busca_assistencia_gestao(user_input)
-                    elif intencao == "gerar_imagem":
-                        resposta = gerar_imagem(user_input)
-                    elif intencao == "analisar_imagem" and uploaded_file:
-                        resposta = analisar_imagem(uploaded_file)
-                    elif intencao == "gerar_audio":
-                        resposta = gerar_audio(user_input)
-                    elif intencao == "analisar_audio" and uploaded_file:
-                        resposta = analisar_audio(uploaded_file)
-                    elif intencao == "gerar_video":
-                        resposta = gerar_video(user_input)
-                    elif intencao == "analisar_video" and uploaded_file:
-                        resposta = analisar_video(uploaded_file)
-                    else:
-                        resposta = busca_geral(user_input)
+                    resposta = resultado.get('resposta_final', 'Desculpe, não consegui processar sua solicitação.')
                     
-                    # Exibir resposta
-                    st.success("✅ Processado com sucesso!")
-                    st.markdown("### 📝 Resposta:")
+                    # Registrar interação no sistema de aprendizado
+                    st.session_state.learning_system.record_interaction(
+                        user_input=prompt,
+                        intent=resultado.get('intencao', 'desconhecido'),
+                        model_used="gpt-4o"
+                    )
+                    
                     st.markdown(resposta)
                     
-                    # Registrar feedback positivo (assumindo sucesso)
-                    learning_system.record_feedback(
-                        user_input if user_input else "Upload de arquivo",
-                        resposta,
-                        "positive"
-                    )
+                    # Adicionar resposta ao histórico
+                    st.session_state.messages.append({"role": "assistant", "content": resposta})
                     
                 except Exception as e:
-                    st.error(f"❌ Erro ao processar: {str(e)}")
-                    # Registrar feedback negativo
-                    learning_system.record_feedback(
-                        user_input if user_input else "Upload de arquivo",
-                        str(e),
-                        "negative"
+                    error_msg = f"Erro ao processar: {str(e)}"
+                    st.error(error_msg)
+                    
+                    # Registrar erro no sistema de aprendizado
+                    st.session_state.learning_system.record_interaction(
+                        user_input=prompt,
+                        intent="erro",
+                        model_used="gpt-4o"
                     )
-        else:
-            st.warning("⚠️ Por favor, digite uma pergunta ou faça upload de um arquivo.")
 
-with col2:
-    st.header("🎯 Intenções Detectadas")
-    
-    # Mostrar exemplos de intenções
-    st.markdown("""
-    **Contabilidade:**
-    - Como emitir nota fiscal?
-    - Fazer lançamento contábil
-    
-    **Banco de Dados:**
-    - Consulta SQL
-    - Estrutura de tabelas
-    
-    **Gestão:**
-    - Relatórios gerenciais
-    - Controle de estoque
-    
-    **Multimodal:**
-    - Gerar/analisar imagens
-    - Processar áudio/vídeo
-    """)
-    
-    st.markdown("---")
-    st.header("📈 Consultas Frequentes")
-    
-    # Mostrar consultas mais frequentes
-    insights = learning_system.get_learning_insights()
-    frequent_queries = insights.get('frequent_queries', [])
-    
-    for i, query in enumerate(frequent_queries[:5], 1):
-        st.markdown(f"{i}. {query}")
-
-# Footer
-st.markdown("---")
-st.markdown(
-    """
-    <div style='text-align: center'>
-        <p>🚀 Assistente Multimodal Inteligente | Desenvolvido com Streamlit</p>
-    </div>
-    """,
-    unsafe_allow_html=True
-)
+if __name__ == "__main__":
+    main()
