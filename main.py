@@ -26,7 +26,7 @@ def main():
     
     /* Container principal */
     .main .block-container {
-        background: rgba(255, 255, 255, 0.95);
+        background: #557D87;
         border-radius: 15px;
         padding: 2rem;
         margin-top: 1rem;
@@ -46,7 +46,7 @@ def main():
     
     /* Chat messages */
     .stChatMessage {
-        background: rgba(255, 255, 255, 0.9);
+        background: #557D87;
         border-radius: 10px;
         margin: 0.5rem 0;
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
@@ -76,7 +76,7 @@ def main():
     
     /* File uploader */
     .stFileUploader {
-        background: rgba(255, 255, 255, 0.8);
+        background:#557D87;
         border-radius: 10px;
         padding: 1rem;
         border: 2px dashed #4facfe;
@@ -105,9 +105,21 @@ def main():
         color: #2c3e50;
         text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
     }
+    /*ToolBar*/
+    .stAppToolbar {
+        background: linear-gradient(120deg, #557D87 0%, #5cfe 100%);
+    }
+    /*stBottomBlockContainer*/
+    .st-emotion-cache-1y34ygi  {
+        background: linear-gradient(120deg, #557D87 0%, #5cfe 100%);
+    }
+    p{
+        text-align: center;
+    }
     </style>
     """, unsafe_allow_html=True)
     
+
     st.title("Assistente Multimodal Spartacus Sistemas")
     st.markdown("Sistema inteligente baseado em grafos para assistência especializada")
     

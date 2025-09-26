@@ -32,7 +32,7 @@ from tools.analisar_video import analisar_video
 load_dotenv()
 
 # Modelo de linguagem
-llm = ChatOpenAI(model='gpt-4', temperature=0.3)
+llm = ChatOpenAI(model='gpt-4o-mini', temperature=0.3)
 
 # --- ESTADO DO AGENTE ---
 class AgentState(TypedDict):

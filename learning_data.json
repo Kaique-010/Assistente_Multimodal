@@ -65,6 +65,126 @@
       "user_input": "E quando entra em vigor?",
       "intent": "busca_geral",
       "model_used": "gpt-4o"
+    },
+    {
+      "timestamp": "2025-09-25T20:11:30.861425",
+      "user_input": "quem foi eleito o melhor do mundo no balor dor dessa semana ?",
+      "intent": "busca_geral",
+      "model_used": "gpt-4o"
+    },
+    {
+      "timestamp": "2025-09-25T20:13:40.413643",
+      "user_input": "quem foi eleito o melhro do mundo do ballon dor essa semana ",
+      "intent": "busca_geral",
+      "model_used": "gpt-4o"
+    },
+    {
+      "timestamp": "2025-09-25T20:17:02.706040",
+      "user_input": "quem foi eleito melhor do mundo no ballon dor essa smena ",
+      "intent": "busca_geral",
+      "model_used": "gpt-4o"
+    },
+    {
+      "timestamp": "2025-09-25T20:20:42.419530",
+      "user_input": "quem foi eleito o melhro do mundo da ballon dor ",
+      "intent": "busca_geral",
+      "model_used": "gpt-4o"
+    },
+    {
+      "timestamp": "2025-09-25T20:22:25.923106",
+      "user_input": "mas estamos falando de ballon dor 2025",
+      "intent": "busca_geral",
+      "model_used": "gpt-4o"
+    },
+    {
+      "timestamp": "2025-09-25T20:22:55.246697",
+      "user_input": "isso quem foi o campeão?",
+      "intent": "busca_geral",
+      "model_used": "gpt-4o"
+    },
+    {
+      "timestamp": "2025-09-25T20:23:37.564074",
+      "user_input": "quero saber quem ganhou o jogo ontem na libertadores",
+      "intent": "busca_geral",
+      "model_used": "gpt-4o"
+    },
+    {
+      "timestamp": "2025-09-25T20:24:20.631760",
+      "user_input": "resultados de hoje no futebol 25/09/2025",
+      "intent": "busca_geral",
+      "model_used": "gpt-4o"
+    },
+    {
+      "timestamp": "2025-09-25T20:25:02.061118",
+      "user_input": "ok, quero saber os resultados desses jogos de hoje que ja passaram ",
+      "intent": "Desculpe, mas não tenho acesso a resultados em tempo real ou informações atualizadas após meu treinamento. Recomendo verificar um site de esportes ou aplicativo de resultados ao vivo para obter as informações mais recentes sobre os jogos de futebol que ocorreram hoje, 25 de setembro de 2025.",
+      "model_used": "gpt-4o"
+    },
+    {
+      "timestamp": "2025-09-25T20:25:38.434248",
+      "user_input": "sobre o jogo do barcelona me diga um resumo do jogo de hoje ",
+      "intent": "O Barcelona enfrentou o Real Oviedo hoje e venceu a partida por 2 a 1. O jogo foi disputado no Estádio Carlos Tartiere, em Oviedo. \n\n### Resumo do Jogo:\n- **Primeiro Tempo**: O Barcelona começou a partida dominando a posse de bola e criando várias oportunidades. O primeiro gol veio aos 25 minutos, quando **Robert Lewandowski** finalizou com precisão após um cruzamento de **Ferran Torres**. O Real Oviedo tentou reagir, mas a defesa do Barcelona se mostrou sólida.\n\n- **Segundo Tempo**: No início do segundo tempo, o Barcelona ampliou a vantagem com um gol de **Ansu Fati**, que aproveitou um rebote na área. O Real Oviedo conseguiu marcar um gol de honra aos 75 minutos, com **Sergio Tejera**, mas não conseguiu empatar. O Barcelona controlou o jogo até o apito final, garantindo a vitória.\n\n### Destaques:\n- **Robert Lewandowski** e **Ansu Fati** foram os principais destaques do Barcelona, com boas atuações e gols.\n- A defesa do Barcelona se mostrou eficaz, apesar do gol sofrido.\n\nCom essa vitória, o Barcelona continua na briga pelas primeiras posições da La Liga. Se precisar de mais informações, estou à disposição!",
+      "model_used": "gpt-4o"
+    },
+    {
+      "timestamp": "2025-09-25T20:38:04.286104",
+      "user_input": "quem foi eleto melhor do mndo no ballon dor essa semana ",
+      "intent": "busca_geral",
+      "model_used": "gpt-4o"
+    },
+    {
+      "timestamp": "2025-09-25T20:44:55.638512",
+      "user_input": "quem foi eleto melhor do mndo no ballon dor essa semana ",
+      "intent": "busca_geral",
+      "model_used": "gpt-4o"
+    },
+    {
+      "timestamp": "2025-09-25T20:46:20.197092",
+      "user_input": "quem foi eleto melhor do mndo no ballon dor essa semana",
+      "intent": "busca_geral",
+      "model_used": "gpt-4o"
+    },
+    {
+      "timestamp": "2025-09-25T20:47:56.188280",
+      "user_input": "quem foi eleto melhor do mndo no ballon dor essa semana",
+      "intent": "busca_geral",
+      "model_used": "gpt-4o"
+    },
+    {
+      "timestamp": "2025-09-25T20:52:18.257808",
+      "user_input": "Resultados do futebol fe hoje ",
+      "intent": "busca_geral",
+      "model_used": "gpt-4o"
+    },
+    {
+      "timestamp": "2025-09-25T21:00:41.502559",
+      "user_input": "sobre tributação, vamos falar sobre a nova regra de tributação que vai ser impelemtada no brasil em 2026",
+      "intent": "contabilidade",
+      "model_used": "gpt-4o"
+    },
+    {
+      "timestamp": "2025-09-25T21:18:11.816974",
+      "user_input": "busque sobre implementação de uma ferramenta de leitura de urls, embeddings e resposta com agente prebuilt do langgraph ",
+      "intent": "busca_geral",
+      "model_used": "gpt-4o"
+    },
+    {
+      "timestamp": "2025-09-25T21:20:07.400908",
+      "user_input": "isso me ajuda a implementar um agente que faz essas solicitações de leitura de urls, geração de embeddings e respotas com react agente",
+      "intent": "gestao",
+      "model_used": "gpt-4o"
+    },
+    {
+      "timestamp": "2025-09-25T21:24:34.449675",
+      "user_input": "gera um mini video sobre um agente react com embeddings que le url de documentação, gera respostas ",
+      "intent": "gerar_video",
+      "model_used": "gpt-4o"
+    },
+    {
+      "timestamp": "2025-09-25T21:25:29.354740",
+      "user_input": "gere um audio explicativosobre  um agente react com embeddings que le url de documentação, gera respostas",
+      "intent": "gerar_audio",
+      "model_used": "gpt-4o"
     }
   ],
   "feedback": [
@@ -107,10 +227,15 @@
   ],
   "usage_patterns": {
     "gerar_imagem": 1,
-    "contabilidade": 4,
+    "contabilidade": 5,
     "banco_de_dados": 3,
-    "busca_geral": 2,
-    "erro": 1
+    "busca_geral": 16,
+    "erro": 1,
+    "Desculpe, mas não tenho acesso a resultados em tempo real ou informações atualizadas após meu treinamento. Recomendo verificar um site de esportes ou aplicativo de resultados ao vivo para obter as informações mais recentes sobre os jogos de futebol que ocorreram hoje, 25 de setembro de 2025.": 1,
+    "O Barcelona enfrentou o Real Oviedo hoje e venceu a partida por 2 a 1. O jogo foi disputado no Estádio Carlos Tartiere, em Oviedo. \n\n### Resumo do Jogo:\n- **Primeiro Tempo**: O Barcelona começou a partida dominando a posse de bola e criando várias oportunidades. O primeiro gol veio aos 25 minutos, quando **Robert Lewandowski** finalizou com precisão após um cruzamento de **Ferran Torres**. O Real Oviedo tentou reagir, mas a defesa do Barcelona se mostrou sólida.\n\n- **Segundo Tempo**: No início do segundo tempo, o Barcelona ampliou a vantagem com um gol de **Ansu Fati**, que aproveitou um rebote na área. O Real Oviedo conseguiu marcar um gol de honra aos 75 minutos, com **Sergio Tejera**, mas não conseguiu empatar. O Barcelona controlou o jogo até o apito final, garantindo a vitória.\n\n### Destaques:\n- **Robert Lewandowski** e **Ansu Fati** foram os principais destaques do Barcelona, com boas atuações e gols.\n- A defesa do Barcelona se mostrou eficaz, apesar do gol sofrido.\n\nCom essa vitória, o Barcelona continua na briga pelas primeiras posições da La Liga. Se precisar de mais informações, estou à disposição!": 1,
+    "gestao": 1,
+    "gerar_video": 1,
+    "gerar_audio": 1
   },
-  "last_updated": "2025-09-25T11:42:24.364493"
+  "last_updated": "2025-09-25T21:25:29.354740"
 }
