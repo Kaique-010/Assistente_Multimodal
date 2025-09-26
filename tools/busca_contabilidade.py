@@ -4,6 +4,7 @@ Ferramenta especializada em contabilidade e tributação brasileira.
 
 import os
 import pickle
+import numpy as np
 from langchain_openai import ChatOpenAI
 from langchain.prompts import PromptTemplate
 from langchain.schema import HumanMessage
@@ -12,68 +13,153 @@ from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain_openai import OpenAIEmbeddings
 from langchain_community.vectorstores import FAISS
 from langchain.chains import RetrievalQA
+from config_knowledge import get_contabilidade_urls
+
+# Importar modelos Django
+import setup_django
+setup_django.setup_django()
+from tools.models import ArtigoProcessado, ArtigosFonte
 
 class ContabilidadeKnowledgeBase:
     def __init__(self):
         self.cache_file = "cache_contabilidade.pkl"
-        self.urls_contabilidade = [
+        self.urls_contabilidade = get_contabilidade_urls() + [
             "https://www.gov.br/receitafederal/pt-br",
             "https://www.cfc.org.br/",
             "https://www.sped.fazenda.gov.br/",
             "https://www.nfe.fazenda.gov.br/",
         ]
         self.vectorstore = None
+        self.embeddings = OpenAIEmbeddings(api_key=os.getenv("OPENAI_API_KEY"))
+        
+    def _get_database_content(self):
+        """Busca conteúdo relevante do banco de dados por palavras-chave."""
+        # Palavras-chave relacionadas à contabilidade
+        keywords_contabilidade = [
+            'contabil', 'fiscal', 'tribut', 'imposto',
+            'balancete', 'dre', 'balanço', 'lancamento', 'plano de contas',
+            'icms', 'ipi', 'pis', 'cofins', 'irpj', 'csll', 'simples nacional',
+            'sped', 'ecd', 'ecf', 'efd', 'contabilidade', 'tributacao'
+        ]
+        
+        # Buscar artigos relacionados à contabilidade
+        artigos_relevantes = []
+        for keyword in keywords_contabilidade:
+            # Buscar no título
+            artigos_titulo = ArtigosFonte.objects.filter(titulo__icontains=keyword)
+            # Buscar no menu
+            artigos_menu = ArtigosFonte.objects.filter(menu__icontains=keyword)
+            
+            for artigo in artigos_titulo.union(artigos_menu):
+                if artigo not in artigos_relevantes:
+                    artigos_relevantes.append(artigo)
+        
+        return artigos_relevantes[:50]  # Limitar a 50 artigos mais relevantes
         
     def load_or_create_knowledge_base(self):
-        """Carrega ou cria a base de conhecimento."""
+        """Carrega ou cria a base de conhecimento híbrida."""
         faiss_path = self.cache_file.replace('.pkl', '_faiss')
         
         # Tentar carregar usando FAISS save_local primeiro
         if os.path.exists(faiss_path):
             try:
-                embeddings = OpenAIEmbeddings(api_key=os.getenv("OPENAI_API_KEY"))
-                self.vectorstore = FAISS.load_local(faiss_path, embeddings, allow_dangerous_deserialization=True)
+                self.vectorstore = FAISS.load_local(faiss_path, self.embeddings, allow_dangerous_deserialization=True)
+                # Adicionar conteúdo do banco de dados
+                self._add_database_content()
                 return
             except Exception as e:
                 print(f"Erro ao carregar FAISS: {e}")
         
-        # Fallback para pickle (compatibilidade)
-        if os.path.exists(self.cache_file):
-            try:
-                with open(self.cache_file, 'rb') as f:
-                    self.vectorstore = pickle.load(f)
-                return
-            except Exception as e:
-                print(f"Erro ao carregar pickle: {e}")
-        
         # Criar nova base de conhecimento
         self._create_knowledge_base()
     
-    def _create_knowledge_base(self):
-        """Cria uma nova base de conhecimento."""
+    def _add_database_content(self):
+        """Adiciona conteúdo do banco de dados ao vectorstore existente."""
         try:
-            # Carregar documentos
-            loader = WebBaseLoader(self.urls_contabilidade)
-            documents = loader.load()
+            artigos_relevantes = self._get_database_content()
             
-            # Dividir em chunks
-            text_splitter = RecursiveCharacterTextSplitter(
-                chunk_size=1000,
-                chunk_overlap=200
-            )
-            texts = text_splitter.split_documents(documents)
+            if not artigos_relevantes:
+                return
+                
+            # Preparar textos dos artigos processados
+            texts = []
+            metadatas = []
             
-            # Criar embeddings
-            embeddings = OpenAIEmbeddings(api_key=os.getenv("OPENAI_API_KEY"))
+            for artigo in artigos_relevantes:
+                # Buscar trechos processados com embeddings
+                trechos = ArtigoProcessado.objects.filter(fonte=artigo, embedding__isnull=False)
+                
+                for trecho in trechos:
+                    texts.append(trecho.conteudo_limpo)
+                    metadatas.append({
+                        'source': f'Artigo ID: {artigo.artigo_id}',
+                        'title': artigo.titulo,
+                        'menu': artigo.menu,
+                        'type': 'database'
+                    })
             
-            # Criar vectorstore
-            self.vectorstore = FAISS.from_documents(texts, embeddings)
+            if texts:
+                # Adicionar ao vectorstore existente
+                self.vectorstore.add_texts(texts, metadatas=metadatas)
+                
+        except Exception as e:
+            print(f"Erro ao adicionar conteúdo do banco: {e}")
+    
+    def _create_knowledge_base(self):
+        """Cria uma nova base de conhecimento híbrida."""
+        try:
+            all_texts = []
+            all_metadatas = []
             
-            # Salvar cache usando FAISS save_local
+            # 1. Carregar documentos das URLs
             try:
-                self.vectorstore.save_local(self.cache_file.replace('.pkl', '_faiss'))
-            except Exception as save_error:
-                print(f"Aviso: Não foi possível salvar cache: {save_error}")
+                loader = WebBaseLoader(self.urls_contabilidade)
+                documents = loader.load()
+                
+                # Dividir em chunks
+                text_splitter = RecursiveCharacterTextSplitter(
+                    chunk_size=1000,
+                    chunk_overlap=200
+                )
+                url_texts = text_splitter.split_documents(documents)
+                
+                for doc in url_texts:
+                    all_texts.append(doc.page_content)
+                    all_metadatas.append({
+                        'source': doc.metadata.get('source', 'URL'),
+                        'type': 'web'
+                    })
+                    
+            except Exception as e:
+                print(f"Erro ao carregar URLs: {e}")
+            
+            # 2. Adicionar conteúdo do banco de dados
+            artigos_relevantes = self._get_database_content()
+            
+            for artigo in artigos_relevantes:
+                # Buscar trechos processados
+                trechos = ArtigoProcessado.objects.filter(fonte=artigo)
+                
+                for trecho in trechos:
+                    all_texts.append(trecho.conteudo_limpo)
+                    all_metadatas.append({
+                        'source': f'Artigo ID: {artigo.artigo_id}',
+                        'title': artigo.titulo,
+                        'menu': artigo.menu,
+                        'type': 'database'
+                    })
+            
+            if all_texts:
+                # Criar vectorstore
+                self.vectorstore = FAISS.from_texts(all_texts, self.embeddings, metadatas=all_metadatas)
+                
+                # Salvar cache
+                try:
+                    self.vectorstore.save_local(self.cache_file.replace('.pkl', '_faiss'))
+                except Exception as save_error:
+                    print(f"Aviso: Não foi possível salvar cache: {save_error}")
+            else:
+                print("Nenhum conteúdo encontrado para criar a base de conhecimento")
                 
         except Exception as e:
             print(f"Erro ao criar base de conhecimento: {e}")
@@ -103,17 +189,17 @@ def busca_contabilidade(pergunta):
     
     # Prompt especializado
     prompt_template = """
-    Você é um especialista em contabilidade e tributação brasileira com acesso a manuais de ERP.
+    Você é um especialista em contabilidade e tributação brasileira com acesso a manuais de ERP e base de conhecimento atualizada.
     
     INSTRUÇÕES:
     - Forneça respostas práticas e precisas sobre contabilidade
-    - Use a base de conhecimento para informações específicas sobre:
-      * Emissão de notas fiscais
-      * Lançamentos contábeis
-      * Obrigações tributárias
-      * Procedimentos no ERP
+    - Use a base de conhecimento que inclui:
+      * Manuais do ERP Spartacus processados
+      * Informações de sites oficiais
+      * Procedimentos específicos do sistema
+    - Priorize informações dos manuais do ERP quando disponíveis
     - Inclua exemplos práticos quando possível
-    - Cite a legislação relevante quando aplicável
+    - Cite a fonte quando relevante
     
     CONTEXTO DA BASE DE CONHECIMENTO:
     {context}
@@ -125,11 +211,11 @@ def busca_contabilidade(pergunta):
     
     try:
         if kb.vectorstore:
-            # Usar RAG com base de conhecimento
+            # Usar RAG com base de conhecimento híbrida
             qa_chain = RetrievalQA.from_chain_type(
                 llm=llm,
                 chain_type="stuff",
-                retriever=kb.vectorstore.as_retriever(search_kwargs={"k": 3}),
+                retriever=kb.vectorstore.as_retriever(search_kwargs={"k": 5}),
                 chain_type_kwargs={
                     "prompt": PromptTemplate(
                         template=prompt_template,

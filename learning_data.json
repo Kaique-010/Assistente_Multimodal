@@ -185,6 +185,66 @@
       "user_input": "gere um audio explicativosobre  um agente react com embeddings que le url de documentação, gera respostas",
       "intent": "gerar_audio",
       "model_used": "gpt-4o"
+    },
+    {
+      "timestamp": "2025-09-26T08:12:08.901851",
+      "user_input": "melhores hoteis em ponta grossa Pàraná",
+      "intent": "erro",
+      "model_used": "gpt-4o"
+    },
+    {
+      "timestamp": "2025-09-26T08:13:27.226579",
+      "user_input": "melhores hoteis em ponta grossa Pàraná",
+      "intent": "busca_geral",
+      "model_used": "gpt-4o"
+    },
+    {
+      "timestamp": "2025-09-26T11:18:27.622959",
+      "user_input": "como emitir uma nota fiscal",
+      "intent": "contabilidade",
+      "model_used": "gpt-4o"
+    },
+    {
+      "timestamp": "2025-09-26T11:19:29.763581",
+      "user_input": "como posso cadastrar um produto ?",
+      "intent": "gestao",
+      "model_used": "gpt-4o"
+    },
+    {
+      "timestamp": "2025-09-26T11:20:48.509174",
+      "user_input": "e para emitir uma nota fiscal ?",
+      "intent": "gestao",
+      "model_used": "gpt-4o"
+    },
+    {
+      "timestamp": "2025-09-26T11:22:29.683074",
+      "user_input": "como posso ver o extrato de movimentação dos produtos ?",
+      "intent": "busca_geral",
+      "model_used": "gpt-4o"
+    },
+    {
+      "timestamp": "2025-09-26T11:23:49.242653",
+      "user_input": "sobre a dirf ",
+      "intent": "busca_geral",
+      "model_used": "gpt-4o"
+    },
+    {
+      "timestamp": "2025-09-26T11:24:18.913398",
+      "user_input": "efd",
+      "intent": "A EFD, ou Escrituração Fiscal Digital, é um arquivo digital que contém a escrituração de documentos fiscais e informações sobre a apuração de tributos, como ICMS e IPI. Essa obrigação acessória foi criada para modernizar e facilitar a fiscalização por parte da Receita Federal e das Secretarias da Fazenda dos Estados. A EFD faz parte do Sistema Público de Escrituração Digital (SPED) e é obrigatória para empresas que estão sujeitas ao regime de apuração do ICMS e IPI.\n\nA EFD deve ser enviada mensalmente e deve conter informações detalhadas sobre as operações de entrada e saída de mercadorias, prestação de serviços, apuração de impostos e outras informações relevantes. O objetivo é garantir maior transparência e controle sobre as operações fiscais das empresas, além de reduzir a burocracia e o uso de papel.\n\nAs empresas devem ficar atentas aos prazos de entrega e às informações que precisam ser incluídas na EFD para evitar penalidades e problemas com a fiscalização. É importante contar com um sistema de gestão que facilite a geração e o envio da EFD, garantindo que todas as informações sejam enviadas corretamente e dentro do prazo.",
+      "model_used": "gpt-4o"
+    },
+    {
+      "timestamp": "2025-09-26T11:25:09.015002",
+      "user_input": "gostaria de saber como envio o efd",
+      "intent": "Para enviar a EFD (Escrituração Fiscal Digital), siga os passos abaixo:\n\n1. **Preparação dos Dados**: Certifique-se de que todos os dados necessários para a EFD estão completos e corretos. Isso inclui informações sobre notas fiscais, receitas, despesas e outros dados fiscais relevantes.\n\n2. **Utilização do Programa da Receita Federal**: Acesse o programa da Receita Federal específico para a EFD, que pode ser baixado no site da Receita. Esse programa permite que você importe ou digite os dados necessários.\n\n3. **Validação dos Dados**: Após inserir os dados, utilize a funcionalidade de validação do programa para garantir que não há erros ou inconsistências. O programa irá gerar um arquivo com a extensão .txt.\n\n4. **Assinatura do Arquivo**: O arquivo gerado deve ser assinado digitalmente. Para isso, você precisará de um certificado digital válido.\n\n5. **Envio do Arquivo**: Acesse o sistema da Receita Federal (e-CAC) e faça o login com seu certificado digital. Na área de \"Declarações e Demonstrativos\", localize a opção para enviar a EFD e faça o upload do arquivo .txt que você gerou e assinou.\n\n6. **Confirmação de Recebimento**: Após o envio, aguarde a confirmação de recebimento da Receita Federal. É importante guardar esse comprovante para eventuais verificações futuras.\n\n7. **Correções (se necessário)**: Caso haja necessidade de correções, você poderá retificar a EFD seguindo o mesmo processo, mas utilizando a opção de retificação no sistema.\n\nLembre-se de que o prazo para envio da EFD é mensal e deve ser respeitado para evitar multas e penalidades. Se tiver dúvidas, consulte um contador ou especialista em tributação.",
+      "model_used": "gpt-4o"
+    },
+    {
+      "timestamp": "2025-09-26T11:25:39.099950",
+      "user_input": "como vejo os lotes dos produtos ?",
+      "intent": "Para visualizar os lotes dos produtos no sistema ERP, siga os passos abaixo:\n\n1. Acesse o módulo de \"Estoque\" no menu principal.\n\n2. Clique na opção \"Consulta de Lotes\" ou \"Gerenciamento de Lotes\", dependendo da nomenclatura do seu sistema.\n\n3. Na tela de consulta, você poderá filtrar os lotes por diversos critérios, como:\n   - Código do produto\n   - Nome do produto\n   - Data de validade\n   - Data de entrada\n   - Situação do lote (ativo, inativo, etc.)\n\n4. Após preencher os filtros desejados, clique em \"Pesquisar\" ou \"Consultar\".\n\n5. O sistema irá listar todos os lotes que atendem aos critérios informados, permitindo que você visualize informações detalhadas sobre cada lote, como quantidade disponível, localização no estoque e data de validade.\n\n6. Se necessário, você pode exportar essa lista para um arquivo, como Excel ou PDF, para facilitar a análise.\n\nLembre-se de que a gestão de lotes é importante para o controle de validade e rastreabilidade dos produtos, especialmente em setores como alimentos e farmacêuticos.",
+      "model_used": "gpt-4o"
     }
   ],
   "feedback": [
@@ -227,15 +287,18 @@
   ],
   "usage_patterns": {
     "gerar_imagem": 1,
-    "contabilidade": 5,
+    "contabilidade": 6,
     "banco_de_dados": 3,
-    "busca_geral": 16,
-    "erro": 1,
+    "busca_geral": 19,
+    "erro": 2,
     "Desculpe, mas não tenho acesso a resultados em tempo real ou informações atualizadas após meu treinamento. Recomendo verificar um site de esportes ou aplicativo de resultados ao vivo para obter as informações mais recentes sobre os jogos de futebol que ocorreram hoje, 25 de setembro de 2025.": 1,
     "O Barcelona enfrentou o Real Oviedo hoje e venceu a partida por 2 a 1. O jogo foi disputado no Estádio Carlos Tartiere, em Oviedo. \n\n### Resumo do Jogo:\n- **Primeiro Tempo**: O Barcelona começou a partida dominando a posse de bola e criando várias oportunidades. O primeiro gol veio aos 25 minutos, quando **Robert Lewandowski** finalizou com precisão após um cruzamento de **Ferran Torres**. O Real Oviedo tentou reagir, mas a defesa do Barcelona se mostrou sólida.\n\n- **Segundo Tempo**: No início do segundo tempo, o Barcelona ampliou a vantagem com um gol de **Ansu Fati**, que aproveitou um rebote na área. O Real Oviedo conseguiu marcar um gol de honra aos 75 minutos, com **Sergio Tejera**, mas não conseguiu empatar. O Barcelona controlou o jogo até o apito final, garantindo a vitória.\n\n### Destaques:\n- **Robert Lewandowski** e **Ansu Fati** foram os principais destaques do Barcelona, com boas atuações e gols.\n- A defesa do Barcelona se mostrou eficaz, apesar do gol sofrido.\n\nCom essa vitória, o Barcelona continua na briga pelas primeiras posições da La Liga. Se precisar de mais informações, estou à disposição!": 1,
-    "gestao": 1,
+    "gestao": 3,
     "gerar_video": 1,
-    "gerar_audio": 1
+    "gerar_audio": 1,
+    "A EFD, ou Escrituração Fiscal Digital, é um arquivo digital que contém a escrituração de documentos fiscais e informações sobre a apuração de tributos, como ICMS e IPI. Essa obrigação acessória foi criada para modernizar e facilitar a fiscalização por parte da Receita Federal e das Secretarias da Fazenda dos Estados. A EFD faz parte do Sistema Público de Escrituração Digital (SPED) e é obrigatória para empresas que estão sujeitas ao regime de apuração do ICMS e IPI.\n\nA EFD deve ser enviada mensalmente e deve conter informações detalhadas sobre as operações de entrada e saída de mercadorias, prestação de serviços, apuração de impostos e outras informações relevantes. O objetivo é garantir maior transparência e controle sobre as operações fiscais das empresas, além de reduzir a burocracia e o uso de papel.\n\nAs empresas devem ficar atentas aos prazos de entrega e às informações que precisam ser incluídas na EFD para evitar penalidades e problemas com a fiscalização. É importante contar com um sistema de gestão que facilite a geração e o envio da EFD, garantindo que todas as informações sejam enviadas corretamente e dentro do prazo.": 1,
+    "Para enviar a EFD (Escrituração Fiscal Digital), siga os passos abaixo:\n\n1. **Preparação dos Dados**: Certifique-se de que todos os dados necessários para a EFD estão completos e corretos. Isso inclui informações sobre notas fiscais, receitas, despesas e outros dados fiscais relevantes.\n\n2. **Utilização do Programa da Receita Federal**: Acesse o programa da Receita Federal específico para a EFD, que pode ser baixado no site da Receita. Esse programa permite que você importe ou digite os dados necessários.\n\n3. **Validação dos Dados**: Após inserir os dados, utilize a funcionalidade de validação do programa para garantir que não há erros ou inconsistências. O programa irá gerar um arquivo com a extensão .txt.\n\n4. **Assinatura do Arquivo**: O arquivo gerado deve ser assinado digitalmente. Para isso, você precisará de um certificado digital válido.\n\n5. **Envio do Arquivo**: Acesse o sistema da Receita Federal (e-CAC) e faça o login com seu certificado digital. Na área de \"Declarações e Demonstrativos\", localize a opção para enviar a EFD e faça o upload do arquivo .txt que você gerou e assinou.\n\n6. **Confirmação de Recebimento**: Após o envio, aguarde a confirmação de recebimento da Receita Federal. É importante guardar esse comprovante para eventuais verificações futuras.\n\n7. **Correções (se necessário)**: Caso haja necessidade de correções, você poderá retificar a EFD seguindo o mesmo processo, mas utilizando a opção de retificação no sistema.\n\nLembre-se de que o prazo para envio da EFD é mensal e deve ser respeitado para evitar multas e penalidades. Se tiver dúvidas, consulte um contador ou especialista em tributação.": 1,
+    "Para visualizar os lotes dos produtos no sistema ERP, siga os passos abaixo:\n\n1. Acesse o módulo de \"Estoque\" no menu principal.\n\n2. Clique na opção \"Consulta de Lotes\" ou \"Gerenciamento de Lotes\", dependendo da nomenclatura do seu sistema.\n\n3. Na tela de consulta, você poderá filtrar os lotes por diversos critérios, como:\n   - Código do produto\n   - Nome do produto\n   - Data de validade\n   - Data de entrada\n   - Situação do lote (ativo, inativo, etc.)\n\n4. Após preencher os filtros desejados, clique em \"Pesquisar\" ou \"Consultar\".\n\n5. O sistema irá listar todos os lotes que atendem aos critérios informados, permitindo que você visualize informações detalhadas sobre cada lote, como quantidade disponível, localização no estoque e data de validade.\n\n6. Se necessário, você pode exportar essa lista para um arquivo, como Excel ou PDF, para facilitar a análise.\n\nLembre-se de que a gestão de lotes é importante para o controle de validade e rastreabilidade dos produtos, especialmente em setores como alimentos e farmacêuticos.": 1
   },
-  "last_updated": "2025-09-25T21:25:29.354740"
+  "last_updated": "2025-09-26T11:25:39.099950"
 }
